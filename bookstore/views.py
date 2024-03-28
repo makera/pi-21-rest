@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView, ListView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -28,3 +29,8 @@ class BookViewSet(ModelViewSet):
     @action(methods=['POST'], detail=True)
     def take(self, request, pk):
         return Response(data={'status': 'ok'}, status=200)
+
+
+class BookList(ListView):
+    template_name = 'bookstore/books.html'
+    queryset = Book.objects.all()
